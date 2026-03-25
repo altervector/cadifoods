@@ -1,1 +1,1 @@
-Sitemap: https://cadifoods.netlify.app/sitemap.xml
+Sitemap: https://cadialimentacio.netlify.app/sitemap.xml
