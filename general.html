@@ -36,13 +36,7 @@
 <hr class="separador-hr">
 
 
-<script>
-    // Aquesta variable serà llegida pel fitxer JS remot
-   ZZZ
-</script>
-
 <script src="https://altervector.github.io/cadinamics/galerialogic.js" defer></script>
-
 
 
 <script>
@@ -55,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         galeria.classList.add('esperant-validacio');
 
         setTimeout(() => {
-            // ESCUDO DE INTEGRIDAD: Bloqueo de "undefined"
             if (titol.innerText.includes("undefined") ||!titol.innerText.trim()) {
                 titol.innerText = "Carregant...";
             }
