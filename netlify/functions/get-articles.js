@@ -1,10 +1,7 @@
-const fetch = require('node-fetch');
+// HEM TREM LA LÍNIA DEL REQUIRE node-fetch
 
 exports.handler = async (event) => {
-    // Agafem la categoria que ve de la URL del navegador
     const { cat } = event.queryStringParameters;
-    
-    // Aquestes dades les agafarà soles de la configuració de Netlify
     const BASE_ID = process.env.AIRTABLE_BASE_ID;
     const TOKEN = process.env.AIRTABLE_TOKEN;
     const TABLE_NAME = 'Articles';
@@ -13,11 +10,11 @@ exports.handler = async (event) => {
         return { statusCode: 400, body: JSON.stringify({ error: "Falta la categoria" }) };
     }
 
-    // La teva fórmula de sempre, ben codificada per a la URL
     const filter = `AND(LOWER({Cat})=LOWER('${cat}'), {Web}=1)`;
     const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}?filterByFormula=${encodeURIComponent(filter)}&sort[0][field]=id&sort[0][direction]=asc`;
 
     try {
+        // Fem servir el fetch natiu de Node.js
         const response = await fetch(url, {
             headers: { 
                 'Authorization': `Bearer ${TOKEN}`,
@@ -31,14 +28,14 @@ exports.handler = async (event) => {
             statusCode: 200,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*" // Permet que el teu JS el llegeixi sense problemes
+                "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify(data)
         };
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Error de connexió amb Airtable" })
+            body: JSON.stringify({ error: "Error de connexió" })
         };
     }
 };
