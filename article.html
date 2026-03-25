@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=400, initial-scale=1.0">
+    <title>Fitxa de Producte - Cadí Alimentació</title>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="https://genecarles.github.io/cadiwebdinamicfiles/estils.css">
+    <link rel="icon" href="https://genecarles.github.io/cadiwebdinamicfiles/Icon/logonou.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="capcalera-dinamica"></div>
+    <script src="https://genecarles.github.io/cadiwebdinamicfiles/capcalera.js"></script>
+
+<hr class="separador-hr">
+
+<div id="contingut-fitxa" class="fitxa-producte">
+        <h1>Carregant...</h1>
+</div>
+
+<hr class="separador-hr">
+
+<div id="bloc-enllacos-dinamic"></div>
+<script src="https://genecarles.github.io/cadiwebdinamicfiles/enllacos.js"></script>
+
+<hr class="separador-hr">
+
+<script>
+    window.AIRTABLE_TOKEN = 'patPgNMiJKmmsiX9U.b859ad26b8c423259013a1ed54d6407bc08174bb46d9db29ba0312ee4b3ee8ce';
+</script>
+
+<script src="https://genecarles.github.io/cadiwebdinamicfiles/fitxalogic.js" defer></script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const fitxa = document.getElementById('contingut-fitxa');
+    const h1 = fitxa? fitxa.querySelector('h1') : null;
+
+    if (h1 && fitxa) {
+        h1.classList.add('loading');
+        // Ocultamos el contenido de la ficha (tablas/fotos) pero no el H1
+        Array.from(fitxa.children).forEach(child => {
+            if (child!== h1) child.classList.add('esperant-validacio');
+        });
+
+        setTimeout(() => {
+            // ESCUDO DE INTEGRIDAD: Si Airtable falló, mantenemos "Carregant..."
+            if (h1.innerText.includes("undefined") ||!h1.innerText.trim()) {
+                h1.innerText = "Carregant...";
+            }
+
+            h1.classList.remove('loading');
+            Array.from(fitxa.children).forEach(child => {
+                if (child!== h1) {
+                    child.classList.remove('esperant-validacio');
+                    child.classList.add('revelat-final');
+                }
+            });
+        }, 2000);
+    }
+});
+</script>
+</body>
+</html>

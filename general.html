@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=400, initial-scale=1.0">
+    <title>Fitxa de Producte - Cadí Alimentació</title>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="https://genecarles.github.io/cadiwebdinamicfiles/estils.css">
+    <link rel="icon" href="https://genecarles.github.io/cadiwebdinamicfiles/Icon/logonou.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="capcalera-dinamica"></div>
+    <script src="https://genecarles.github.io/cadiwebdinamicfiles/capcalera.js"></script>
+
+<hr class="separador-hr">
+
+        <div class="galeria-productes">
+            <h1 id="titol-categoria">Carregant...</h1>
+            <p id="descripcio-categoria" class="descripcio-seccio"></p>
+            
+            <div id="cosgaleria">
+                </div>
+        </div>
+    
+<hr class="separador-hr">
+
+<div id="bloc-enllacos-dinamic"></div>
+<script src="https://genecarles.github.io/cadiwebdinamicfiles/enllacos.js"></script>
+<hr class="separador-hr">
+
+
+<script>
+    // Aquesta variable serà llegida pel fitxer JS remot
+    window.AIRTABLE_TOKEN = 'patPgNMiJKmmsiX9U.b859ad26b8c423259013a1ed54d6407bc08174bb46d9db29ba0312ee4b3ee8ce';
+</script>
+
+<script src="https://genecarles.github.io/cadiwebdinamicfiles/galerialogic.js" defer></script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const titol = document.getElementById('titol-categoria');
+    const galeria = document.getElementById('cosgaleria');
+
+    if (titol && galeria) {
+        titol.classList.add('loading');
+        galeria.classList.add('esperant-validacio');
+
+        setTimeout(() => {
+            // ESCUDO DE INTEGRIDAD: Bloqueo de "undefined"
+            if (titol.innerText.includes("undefined") ||!titol.innerText.trim()) {
+                titol.innerText = "Carregant...";
+            }
+            
+            titol.classList.remove('loading');
+            galeria.classList.remove('esperant-validacio');
+            galeria.classList.add('revelat-final');
+        }, 2000);
+    }
+});
+</script>
+
+</body>
+</html>
