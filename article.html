@@ -32,14 +32,7 @@
 
 <hr class="separador-hr">
 
-<script>
-    ZZZZ
-</script>
-
 <script src="https://altervector.github.io/cadinamics/fitxalogic.js" defer></script>
-
-
-
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,13 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (h1 && fitxa) {
         h1.classList.add('loading');
-        // Ocultamos el contenido de la ficha (tablas/fotos) pero no el H1
         Array.from(fitxa.children).forEach(child => {
             if (child!== h1) child.classList.add('esperant-validacio');
         });
 
         setTimeout(() => {
-            // ESCUDO DE INTEGRIDAD: Si Airtable falló, mantenemos "Carregant..."
             if (h1.innerText.includes("undefined") ||!h1.innerText.trim()) {
                 h1.innerText = "Carregant...";
             }
