@@ -7,16 +7,11 @@
     <script>
         async function gestionarSwitch() {
             try {
-                // Truquem a la funció que hem creat a Netlify
                 const resposta = await fetch("/.netlify/functions/get-switch");
                 const dades = await resposta.json();
-
-                // Agafem el primer registre de la taula 'switch'
                 const registre = dades.records[0];
                 
-                // Mirem si el checkbox 'status' està marcat
                 const estaActiu = registre.fields.status === true; 
-                // Agafem el nom del fitxer de la columna (ajusta el nom si cal)
                 const arxiuDesti = registre.fields.nom_arxiu; 
 
                 if (estaActiu && arxiuDesti) {
@@ -31,8 +26,10 @@
         }
 
         function mostrar404() {
-            document.title = "404 Not Found";
-            document.body.innerHTML = '<img src="https://raw.githubusercontent.com/altervector/cadinamics/main/Icon/404.png" style="max-width:100%; height:auto;">';
+            // Cridem al fitxer extern de GitHub per pintar l'error
+            const script = document.createElement('script');
+            script.src = "https://altervector.github.io/cadinamics/error.js";
+            document.head.appendChild(script);
         }
 
         gestionarSwitch();
